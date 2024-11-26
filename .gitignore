@@ -9,3 +9,6 @@
 *.pyc
 *.swp
 
+.DS_Store
+
+*.png

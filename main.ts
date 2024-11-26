@@ -2,7 +2,7 @@ import puppeteer from "npm:puppeteer";
 
 // URL à capturer et fichier de sortie
 const url = "https://menus.for-pro.ch/foodCourt_screen";
-const outputFilePath = "./screenshot.png";
+const outputFilePath = `./screenshot${new Date().getTime()}.png`;
 
 (async () => {
   // Lance un navigateur headless
