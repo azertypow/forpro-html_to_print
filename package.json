@@ -1,0 +1,14 @@
+{
+  "name": "forprohtml2print",
+  "module": "main.ts",
+  "type": "module",
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "puppeteer": "^23.9.0"
+  }
+}

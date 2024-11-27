@@ -1,12 +1,13 @@
-import puppeteer from "npm:puppeteer";
-import * as path from "jsr:@std/path";
+const puppeteer = require("puppeteer");
+// import puppeteer from "puppeteer";
+import * as path from "node:path";
 
 
 // Récupérer le chemin de l'exécutable
 // const execPath = import.meta.url;
 // const execDirectoryPath = path.dirname( new URL(execPath).pathname);
 
-const execPath = Deno.execPath();
+const execPath = process.execPath;
 const execDirectoryPath = path.dirname( execPath );
 
 console.log( execDirectoryPath )
