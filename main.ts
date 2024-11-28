@@ -8,7 +8,11 @@ import {generateImageFromPage} from "./generateImageFromPage.ts";
 
 // Récupérer le chemin de l'exécutable
 const execPath = isExecutable() ? process.execPath : import.meta.url
+
+// directory path
 const execDirectoryPath = isExecutable() ? path.dirname( execPath ) :  path.dirname( new URL(execPath).pathname)
+execDirectoryPath.replace('/C:/', '/')
+// const execDirectoryPath = "/Users/FoodCourt/Desktop/" //si au dessus ca fonctionne pas sur windows
 
 // Lance un navigateur headless
 const browser: Browser = await puppeteer.launch()
