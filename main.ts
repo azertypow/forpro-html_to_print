@@ -1,42 +1,22 @@
-const puppeteer = require("puppeteer");
-// import puppeteer from "puppeteer";
-import * as path from "node:path";
+import {isExecutable} from "./isExecutable.ts";
+
+const puppeteer = require("puppeteer") // require for bun compilation
+import * as path from "node:path"
+import type {Browser} from "puppeteer";
+import {generateImageFromPage} from "./generateImageFromPage.ts";
 
 
 // Récupérer le chemin de l'exécutable
-// const execPath = import.meta.url;
-// const execDirectoryPath = path.dirname( new URL(execPath).pathname);
-
-const execPath = process.execPath;
-const execDirectoryPath = path.dirname( execPath );
-
-console.log( execDirectoryPath )
-
-// URL à capturer et fichier de sortie
-const url = "https://menus.for-pro.ch/foodCourt_screen";
-const outputFilePath = `screenshot${new Date().getTime()}.png`;
+const execPath = isExecutable() ? process.execPath : import.meta.url
+const execDirectoryPath = isExecutable() ? path.dirname( execPath ) :  path.dirname( new URL(execPath).pathname)
 
 // Lance un navigateur headless
-const browser = await puppeteer.launch();
-const page = await browser.newPage();
+const browser: Browser = await puppeteer.launch()
 
-// Charge la page
-await page.goto(url, { waitUntil: "networkidle0" });
-
-await page.emulateMediaType('print')
-
-await page.setViewport({ width: 1920, height: 1080 });
-
-console.log( execDirectoryPath + '/' + outputFilePath )
-
-// Capture d'écran
-await page.screenshot({
-  path: execDirectoryPath + '/' + outputFilePath,
-  // fullPage: true, // Capture toute la page
-});
-
-console.log(`Image sauvegardée sous ${outputFilePath}`);
+await generateImageFromPage(browser, execDirectoryPath + '/1B', "https://menus.for-pro.ch/foodcourt_stations_screens?screen=0")
+await generateImageFromPage(browser, execDirectoryPath + '/2B', "https://menus.for-pro.ch/foodcourt_stations_screens?screen=1")
+await generateImageFromPage(browser, execDirectoryPath + '/3B', "https://menus.for-pro.ch/foodcourt_stations_screens?screen=2")
+await generateImageFromPage(browser, execDirectoryPath + '/4B', "https://menus.for-pro.ch/foodcourt_stations_screens?screen=3")
 
 // Ferme le navigateur
-await browser.close();
-
+await browser.close()
