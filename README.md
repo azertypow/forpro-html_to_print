@@ -13,3 +13,9 @@ bun run main.ts
 ```
 
 This project was created using `bun init` in bun v1.1.13. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
+
+To build:
+
+```bash
+bun build ./main.ts --compile
+```
